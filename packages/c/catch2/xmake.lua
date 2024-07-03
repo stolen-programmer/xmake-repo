@@ -78,6 +78,7 @@ package("catch2")
     on_install(function (package)
         if package:version():ge("3.0") then
             local configs = {"-DCATCH_INSTALL_DOCS=OFF", "-DCATCH_BUILD_TESTING=OFF", "-DCATCH_BUILD_EXAMPLES=OFF"}
+            table.insert(configs, "-DCMAKE_COMPILE_PDB_OUTPUT_DIRECTORY=''")
             table.insert(configs, "-DCMAKE_BUILD_TYPE=" .. (package:debug() and "Debug" or "Release"))
             table.insert(configs, "-DBUILD_SHARED_LIBS=" .. (package:config("shared") and "ON" or "OFF"))
             if package:config("cxx17") then
